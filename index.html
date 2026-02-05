@@ -126,6 +126,15 @@
       from { transform: scale(.96); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
     }
+    @keyframes shake {
+      0% { transform: translate(0, -50%); }
+      25% { transform: translate(5px, -50%); }
+      50% { transform: translate(-5px, -50%); }
+      100% { transform: translate(0, -50%); }
+    }
+    .shaking { 
+      animation: shake 0.1s infinite !important; 
+    }
   </style>
 </head>
 
@@ -274,7 +283,7 @@
       noBtn.style.left = newLeft + "px";
       noBtn.style.top = newTop + "px";
       noBtn.style.transform = "none";
-
+      noBtn.classList.add("shaking");
       growYes();
     }
 
@@ -291,6 +300,7 @@
 
     /* ---------- YES CLICK ---------- */
     yesBtn.addEventListener("click", () => {
+      noBtn.classList.remove("shaking");
       zone.style.display = "none";
       hint.style.display = "none";     // HIDE THE HINT
       result.style.display = "block";
