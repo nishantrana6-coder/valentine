@@ -131,7 +131,20 @@
       border: 5px solid white;
       border-radius: 15px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      z-index: 9996;
+      z-index: 99999; /* Higher to be on top */
+      animation: photoPop 0.5s ease-out forwards;
+    }
+
+    /* --- TEXT POPUP STYLES --- */
+    .floating-text {
+      position: fixed;
+      font-weight: bold;
+      font-size: clamp(20px, 5vw, 36px);
+      color: #ff3b7a;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+      z-index: 99999; /* Higher to be on top */
+      pointer-events: none;
+      white-space: nowrap;
       animation: photoPop 0.5s ease-out forwards;
     }
 
@@ -257,20 +270,34 @@
       result.style.display = "block";
       fullScreenConfetti();
 
-      // --- EDIT YOUR PHOTO FILENAMES HERE ---
-      const myPhotos = ['Diwali.jpeg', 'Barbhiemer.jpeg', 'Nishana (2)[90].png', 'High Dive.jpeg', 'Princess+Frog', 'Princess.jpeg']; 
-      
+      // --- PHOTOS ---
+      const myPhotos = ['Diwali.jpeg', 'Barbhiemer.jpeg', 'Nishana (2)[90].png', 'High Dive.jpeg', 'Princess.jpeg']; 
       const garden = document.getElementById("photo-garden");
+      
       myPhotos.forEach((photo, i) => {
         setTimeout(() => {
           const img = document.createElement('img');
           img.src = photo;
           img.className = 'floating-photo';
-          img.style.left = (Math.random() * 70 + 5) + '%';
-          img.style.top = (Math.random() * 70 + 5) + '%';
+          img.style.left = (Math.random() * 80 + 5) + '%';
+          img.style.top = (Math.random() * 80 + 5) + '%';
           img.style.setProperty('--rot', (Math.random() - 0.5) * 45 + 'deg');
           garden.appendChild(img);
         }, i * 400);
+      });
+
+      // --- MESSAGES ---
+      const messages = ["I can't believe it was a bunch of everybody ❤️", "It's true hedgehogs do tear families apart.", "I barely even have the hair to call myself a natural blonde.", "Something about a fresh payroll🥰"];
+      messages.forEach((text, i) => {
+        setTimeout(() => {
+          const div = document.createElement('div');
+          div.innerText = text;
+          div.className = 'floating-text';
+          div.style.left = (Math.random() * 70 + 15) + '%';
+          div.style.top = (Math.random() * 70 + 15) + '%';
+          div.style.setProperty('--rot', (Math.random() - 0.5) * 30 + 'deg');
+          document.body.appendChild(div);
+        }, i * 500 + 200);
       });
     });
   </script>
